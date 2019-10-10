@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class Counter extends Component {
-  formatBadge() {
-    return this.props.counter.value===0 ? "Zero" : this.props.counter.value;
-  }
-
-  getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.props.counter.value === 0 ? 'warning' : 'primary';
-    return classes;
-  }
-  disable() {
-    return this.props.counter.value===0? true : false;
-  }
-
-  render() {
-    return(
-      <div>
-        <button onClick={ () => { this.props.onDecrement(this.props.counter) } } className="btn btn-secondary btn-sm m-2 " disabled={ this.disable() }>-</button>
-        <span className={ this.getBadgeClasses() }>{ this.formatBadge() }</span>
-        <button onClick={ () => { this.props.onIncrement(this.props.counter) } } className="btn btn-secondary btn-sm m-2 ">+</button>
-        <button onClick={ () => { this.props.onDelete(this.props.counter) } } className="btn btn-danger btn-sm m-2">Del</button>
-      </div>
-    );
-  }
+function formatBadge(props) {
+  return props.counter.value === 0 ? "Zero" : props.counter.value;
 }
 
-export default Counter;
+function getBadgeClasses(props) {
+  let classes = "badge m-2 badge-";
+  classes += props.counter.value === 0 ? "warning" : "primary";
+  return classes;
+}
+
+export function Counter(props) {
+  return (
+    <div>
+      <button onClick={props.handleDecrement(props.counter.uuid)} className="btn btn-success btn-sm m-2 ">
+        -
+      </button>
+      <span className={getBadgeClasses(props)}>{formatBadge(props)}</span>
+      <button onClick={props.handleIncrement(props.counter.uuid)} className="btn btn-success btn-sm m-2 ">
+        +
+      </button>
+      <button onClick={props.handleDelete(props.counter.uuid)} className="btn btn-danger btn-sm m-2">
+        Del
+      </button>
+    </div>
+  );
+}

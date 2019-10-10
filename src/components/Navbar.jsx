@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class Navbar extends Component {
-  getTotal() {
-    var sum = 0;
-    this.props.counters.map(counter => {
-      sum += counter.value;
-    });
-    return sum;
-  }
-  render() {
-    return(
-      <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0">Total:
-          <span className="badge badge-success m-2">{ this.getTotal() }</span>
-        </span>
-      </nav>
-    );
-  }
+function getTotal(props) {
+  return props.counters.reduce((accumulator, counter) => accumulator + counter.value, 0);
 }
 
-export default Navbar;
+export function Navbar(props) {
+  return (
+    <nav className="navbar navbar-light bg-light">
+      <span className="navbar-brand mb-0">
+        Total:
+        <span className="badge badge-success m-2">{getTotal(props)}</span>
+      </span>
+    </nav>
+  );
+}
