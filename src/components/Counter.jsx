@@ -13,7 +13,7 @@ function getBadgeClasses(props) {
 export function Counter(props) {
   return (
     <div>
-      <button onClick={props.handleDecrement(props.counter.uuid)} className="btn btn-success btn-sm m-2 ">
+      <button onClick={props.handleDecrement(props.counter.uuid)} disabled={!props.counter.value} className="btn btn-success btn-sm m-2 ">
         -
       </button>
       <span className={getBadgeClasses(props)}>{formatBadge(props)}</span>
